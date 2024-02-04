@@ -4,10 +4,11 @@ import 'package:flutter/material.dart';
 import "package:shepays/main.dart";
 import 'package:http/http.dart' as http;
 import 'package:convert/convert.dart';
+import "package:shepays/constant.dart";
 
-const String urll ='https://dev.shepays.com/api/introscreen-images' ;
 dynamic json ;
 List<dynamic> imageurl = [] ;
+const String urll ='$baseUrl$endpoint';
 
 
 Future<dynamic> apii () async{

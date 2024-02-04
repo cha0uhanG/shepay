@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import "package:shepays/API.dart";
+import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import "package:shepays/constant.dart";
+import "package:shepays/Signup_page.dart";
+import "package:shepays/Signin_page.dart";
 
 void main() {
   runApp(const MyApp());
@@ -29,7 +33,7 @@ class MyHome extends StatefulWidget {
   State<MyHome> createState() => _MyHomeState();
 }
 class _MyHomeState extends State<MyHome> {
-  final PageController _pageController = PageController();
+  final PageController pageController = PageController();
   List<dynamic> imagesurl = [];
  @override
   void initState() {
@@ -47,37 +51,57 @@ class _MyHomeState extends State<MyHome> {
             child: Container(width:double.infinity,
               height: 200.0,
               child: PageView.builder(
+                controller: pageController,
                 itemCount: imagesurl.length,
                 itemBuilder: (context, index) {
-                  return Container(child: Image.network(imagesurl[index],),);
+                  return Image.network(imagesurl[index],);
                 },
               ),
             ),
           ),
-        SizedBox(height: 100.0),
-          Text("Shop Unlimited",style: TextStyle(fontSize:20 ),),
-          Text("Empowering Financial growth of Indian",style: TextStyle(fontSize:20 ),),
+          SmoothPageIndicator(
+              controller: pageController,  // PageController
+              count:  4,
+              effect:WormEffect(
+                  activeDotColor: colorr
+              ),  // your preferred effect
+
+          )  ,
+        SizedBox(height: 60.0),
+          Text("ShePays",style: TextStyle(fontSize:20,fontWeight:FontWeight.w800  ),),
+          SizedBox(height: 20.0),
+          Text("Empowering Financial growth of Indian",style: TextStyle(fontSize:20,fontWeight:FontWeight.w300  ),),
           Text(" women",style: TextStyle(fontSize:20 ),),
+          SizedBox(height: 40.0),
           ElevatedButton(style: ButtonStyle(
             minimumSize: MaterialStateProperty.all<Size>(
               Size(300, 50), // Adjust the width as needed
             ),
           ),
             onPressed: () {
-              // Add your login logic here
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => Signin()),
+            );
             },
             child: Text('Login'),
           ),
           SizedBox(height: 20.0),
-          ElevatedButton(style: ButtonStyle(
+          ElevatedButton(style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(colorr),
             minimumSize: MaterialStateProperty.all<Size>(
-              Size(300, 50), // Adjust the width as needed
+              Size(300, 50), //#450BEA
             ),
+
           ),
             onPressed: () {
-              // Add your signup logic here
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => Signup()),
+              );
             },
-            child: Text('Sign Up'),
+            child: Text('Sign Up' , style: TextStyle(
+              color: Colors.white, // Set the color of the text
+            ),),
           ),
           SizedBox(height: 30.0),
         ],
