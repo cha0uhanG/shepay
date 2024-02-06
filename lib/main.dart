@@ -115,7 +115,6 @@ class _MyHomeState extends State<MyHome> {
   Future<dynamic> imageapi() async{
     List<dynamic> fetchedImages   =await apii() ;
     imagesurl=fetchedImages ;
-    print(imagesurl);
     print(imagesurl.length);
     setState(() {
     });
